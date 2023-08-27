@@ -1,109 +1,47 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My365Way.com OpenAI RPG Game</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css"> 
-  <script src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
-</head>
-<body>
-<header>
-  <div class="header">
-    <img id="bannerLogo" src="Dungeons&Dragons.svg" alt="Dungeons & Dragons Logo">
-  </div>
-</header>
-<main>
-  <section id="GameSection">
-    <div class="main-body">
-        <div class="container center-content">
-            <div class="content-box">
-                <section id="loggedInSection">
-                    <h1>Only Visible to Logged-In Users</h1>
-                    <p>This content is only visible to users who are logged in.</p>
-                    <input type="text" id="textInput" placeholder="Ihre Eingabe ...">
-                    <button id="sendToAPI" class="btn btn-primary">Eingabe an Azure OpenAI senden</button>                     
-                    <div class="center-content">                                           
-                        <button id="logoutButton" class="btn btn-primary">Abmelden</button>
-                    </div>
-                </section>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My365Way.com OpenAI RPG Game</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">  
+        <script src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+        <script src="msal-api.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="header">
+                <img id="bannerLogo" src="Dungeons&Dragons.svg" alt="Dungeons & Dragons Logo">
             </div>
-        </div>
-    </div>
-  </section>
-</main>
-  <div class="footer">
-    <p>&copy; Christian A. Schreiber 2023. All rights reserved.</p>
-  </div>
-
-    <script src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
-    <script>
-        const MSAL_CONFIG = {
-            auth: {
-                clientId: 'db788f68-6a9c-4a34-b3e6-0a2adca36b1c',
-                authority: 'https://login.microsoftonline.com/630a260f-04bd-4d65-a04d-f922f6c2c4a0',
-                redirectUri: 'https://https://zealous-sand-09a349603.3.azurestaticapps.net//game.html'
-            }
-        };
-
-        const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);
-
-        MSAL_INSTANCE.handleRedirectPromise().then(() => {
-            if (MSAL_INSTANCE.getAllAccounts().length === 0) {
-                // User is not logged in, redirect to the login page
-                window.location.href = 'index.html';
-            }
-        });
-
-        const logoutButton = document.getElementById('logoutButton');
-        const sendToAPIButton = document.getElementById('sendToAPI');
-        const textInput = document.getElementById('textInput');
-
-    logoutButton.addEventListener('click', handleLogout);
-    sendToAPIButton.addEventListener('click', handleSendToAPI);
-
-    async function handleLogout() {
-        try {
-            await MSAL_INSTANCE.logout();
-            loginSection.style.display = 'block';
-            userInfoSection.style.display = 'none';
-        } catch (error) {
-            console.error('Error during logout:', error);
-            alert('Error during logout. Please try again.');
-        }
-    }
-    async function handleSendToAPI() {
-        const inputValue = textInput.value;
-
-        // Hier den Code einfügen, um die Daten an die API zu senden
-        // Beispiel:
-        const apiUrl = 'https://azure-logic-app-api.azure-api.net/manual/paths/invoke';
-        const requestBody = { content: inputValue };
-
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Ocp-Apim-Subscription-Key': '8b7e4fdf256345c7ba89396c193734e8'
-                },
-                body: JSON.stringify(requestBody)
-            });
-
-            if (response.ok) {
-                console.log('Data sent to API successfully');
-            } else {
-                console.error('Error sending data to API:', response.statusText);
-                alert('Error sending data to API. Please try again.');
-            }
-        } catch (error) {
-            console.error('Error sending data to API:', error);
-            alert('Error sending data to API. Please try again.');
-        }
-    }
-</script>
-</body>
+        </header>
+        <main>
+            <section id="GameSection">
+                <div class="main-body">
+                    <div class="container center-content">
+                        <div class="content-box">
+                            <section id="loggedInSection">
+                                <h1>Only Visible to Logged-In Users</h1>
+                                <p>This content is only visible to users who are logged in.</p>
+                                <input type="text" id="textInput" placeholder="Ihre Eingabe ...">
+                                <button id="sendToAPI" class="btn btn-primary">Eingabe an Azure OpenAI senden</button>                     
+                                <div class="center-content">                                           
+                                    <button id="logoutButton" class="btn btn-primary">Abmelden</button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="footer">
+                <p>&copy; Christian A. Schreiber 2023. All rights reserved.</p>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 </html>
