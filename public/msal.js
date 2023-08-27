@@ -1,9 +1,3 @@
-
-
-console.log(config.clientId);
-console.log(config.authority);
-console.log(config.apiKey);
-
 document.addEventListener('DOMContentLoaded', async () => {
     try {
       const response = await fetch('/api/config');
