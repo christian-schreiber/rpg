@@ -1,8 +1,8 @@
 
 
-console.log(process.env.CLIENT_ID);
-console.log(process.env.AUTHORITY);
-console.log(process.env.API_KEY);
+console.log(config.clientId);
+console.log(config.authority);
+console.log(config.apiKey);
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
