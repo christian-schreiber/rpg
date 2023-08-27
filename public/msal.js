@@ -60,4 +60,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Error authenticating user. Please try again.');
       }
     }
-  });
+
+} catch (error) {
+    console.error('Error fetching configuration:', error);
+    alert('Error fetching configuration. Please try again.');
+  }
+});
+
