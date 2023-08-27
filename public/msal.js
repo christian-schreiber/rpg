@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
   
-    const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);
-  
+    const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);  
     const loginButton = document.getElementById('loginButton');
     const loginSection = document.getElementById('loginSection');
     const userInfoSection = document.getElementById('userInfoSection');
