@@ -32,4 +32,4 @@ jobs:
     - run: pm2 -V
     - run: pm2 list
     #running pm2 in mode cluster and --watch set to auto restart if index.js have changes.
-    - run: pm2 start index.js --watch -i max
+    - run: pm2 start app.js --watch -i max
