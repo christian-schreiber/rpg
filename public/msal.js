@@ -1,55 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
     const MSAL_CONFIG = {
-        auth: {
-            clientId: process.env.CLIENT_ID,
-            authority: process.env.AUTHORITY
-        }
+      auth: {
+        clientId: process.env.CLIENT_ID,
+        authority: process.env.AUTHORITY
+      }
     };
-
+  
     const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);
-
+  
     const loginButton = document.getElementById('loginButton');
     const loginSection = document.getElementById('loginSection');
     const userInfoSection = document.getElementById('userInfoSection');
     const userEmailElement = document.getElementById('userEmail');
-
+  
     loginButton.addEventListener('click', handleLogin);
-
+  
     async function handleLogin() {
-        const loginRequest = {
-            scopes: ['user.read', 'email']
-        };
-
-        try {
-const authResult = await MSAL_INSTANCE.loginPopup(loginRequest);
-const accessToken = authResult.accessToken;
-
-// Use the access token to make a request to Microsoft Graph API
-console.log('Before fetch');
-const response = await fetch('https://graph.microsoft.com/v1.0/me', {
-    headers: {
-        'Authorization': `Bearer ${accessToken}`
-    }
-});
-
-if (response.ok) {
-    const user = await response.json();
-    console.log('User object:', user);
-
-    const userEmail = user.mail || user.userPrincipalName || 'No Email';
-    userEmailElement.textContent = `Authenticated Email: ${userEmail}`;
-
-    loginSection.style.display = 'none';
-    userInfoSection.style.display = 'block';
-
-    window.location.href = 'game.html';
-} else {
-    console.error('Error retrieving user information:', response.statusText);
-    alert('Error retrieving user information. Please try again.');
-}
-} catch (error) {
-console.error('Error during login:', error);
-alert('Error during login. Please try again.');
-}
+      const loginRequest = {
+        scopes: ['openid', 'profile']
+      };
+  
+      try {
+        const authResult = await MSAL_INSTANCE.loginPopup(loginRequest);
+        const idToken = authResult.idToken;
+  
+        // Use the id token to authenticate the user on the server-side
+        const response = await fetch('/api/authenticate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ idToken })
+        });
+  
+        if (response.ok) {
+          const user = await response.json();
+          console.log('User object:', user);
+  
+          const userEmail = user.email || 'No Email';
+          userEmailElement.textContent = `Authenticated Email: ${userEmail}`;
+  
+          loginSection.style.display = 'none';
+          userInfoSection.style.display = 'block';
+        } else {
+          console.error('Error authenticating user:', response.statusText);
+          alert('Error authenticating user. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error authenticating user:', error);
+        alert('Error authenticating user. Please try again.');
       }
-    });
+    }
+  });
