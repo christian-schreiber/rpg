@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm i
-    - run: cd /home/christian/apps && git pull
+    - run: cd /home/christian/apps/rpg && git pull
     - run: pm2 -V
     - run: pm2 list
     #running pm2 in mode cluster and --watch set to auto restart if index.js have changes.
