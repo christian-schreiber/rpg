@@ -17,7 +17,6 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -28,7 +27,5 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: cd /home/christian/apps/rpg && git pull
-    - run: pm2 -V
     - run: pm2 list
-    #running pm2 in mode cluster and --watch set to auto restart if index.js have changes.
-    - run: pm2 restart app.js --watch -i max
+    - run: pm2 restart app.js
