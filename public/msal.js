@@ -1,3 +1,7 @@
+console.log(process.env.CLIENT_ID);
+console.log(process.env.AUTHORITY);
+console.log(process.env.API_KEY);
+
 document.addEventListener('DOMContentLoaded', () => {
     const MSAL_CONFIG = {
       auth: {
