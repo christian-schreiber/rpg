@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
 const MSAL_CONFIG = {
     auth: {
         clientId: 'db788f68-6a9c-4a34-b3e6-0a2adca36b1c',
@@ -62,3 +63,4 @@ try {
     alert('Error sending data to API. Please try again.');
 }
 }
+})
