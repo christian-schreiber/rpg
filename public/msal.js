@@ -1,14 +1,10 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const response = await fetch('/api/config');
-      const config = await response.json();
-  
-      const MSAL_CONFIG = {
-        auth: {
-          clientId: config.clientId,
-          authority: config.authority
-        }
-      };
+document.addEventListener('DOMContentLoaded', () => {
+    const MSAL_CONFIG = {
+      auth: {
+        clientId: process.env.CLIENT_ID,
+        authority: process.env.AUTHORITY
+      }
+    };
   
     const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);  
     const loginButton = document.getElementById('loginButton');
@@ -54,10 +50,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Error authenticating user. Please try again.');
       }
     }
-
-} catch (error) {
-    console.error('Error fetching configuration:', error);
-    alert('Error fetching configuration. Please try again.');
-  }
 });
 

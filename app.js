@@ -14,15 +14,6 @@ app.use((req, res, next) => {
 
 })
 
-app.get('/api/config', (req, res) => {
-  const config = {
-    clientId: process.env.CLIENT_ID,
-    authority: process.env.AUTHORITY,
-    apiKey: process.env.API_KEY
-  };
-  res.json(config);
-});
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
