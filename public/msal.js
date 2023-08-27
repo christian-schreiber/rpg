@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const MSAL_CONFIG = {
         auth: {
             clientId: process.env.CLIENT_ID,
-            authority: process.env.AUTHORITY,
+            authority: process.env.AUTHORITY
         }
     };
 
