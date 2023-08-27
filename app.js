@@ -3,9 +3,11 @@ const app = express()
 const port = 5000
 const path = require('path')
 
-const CLIENT_ID = 'db788f68-6a9c-4a34-b3e6-0a2adca36b1c'
-const AUTHORITY = 'https://login.microsoftonline.com/630a260f-04bd-4d65-a04d-f922f6c2c4a0'
-const API_KEY = '8b7e4fdf256345c7ba89396c193734e8';
+require('dotenv').config();
+
+console.log(process.env.CLIENT_ID);
+console.log(process.env.AUTHORITY);
+console.log(process.env.API_KEY);
 
 
 app.use(express.static(path.join(__dirname, 'public')))
