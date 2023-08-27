@@ -1,16 +1,20 @@
-require('dotenv').config();
+
 
 console.log(process.env.CLIENT_ID);
 console.log(process.env.AUTHORITY);
 console.log(process.env.API_KEY);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const MSAL_CONFIG = {
-      auth: {
-        clientId: process.env.CLIENT_ID,
-        authority: process.env.AUTHORITY
-      }
-    };
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const response = await fetch('/api/config');
+      const config = await response.json();
+  
+      const MSAL_CONFIG = {
+        auth: {
+          clientId: config.clientId,
+          authority: config.authority
+        }
+      };
   
     const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);  
     const loginButton = document.getElementById('loginButton');
