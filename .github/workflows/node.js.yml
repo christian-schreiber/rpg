@@ -29,4 +29,4 @@ jobs:
     - run: cd /home/christian/apps/rpg && git pull
     - run: pm2 list
     - run: pm2 restart app.js
-    - run: pm2 pm2 restart all
+    - run: pm2 restart all
