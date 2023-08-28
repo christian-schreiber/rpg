@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const MSAL_CONFIG = {
       auth: {
-        clientId: process.env.CLIENT_ID,
-        authority: process.env.AUTHORITY,
+        clientId: 'db788f68-6a9c-4a34-b3e6-0a2adca36b1c',
+        authority: 'https://login.microsoftonline.com/630a260f-04bd-4d65-a04d-f922f6c2c4a0',
         redirectUri: window.location.origin + '/game.html'
       }
     };
