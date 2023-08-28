@@ -7,21 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Authority:', config.authority);
             console.log('API Key:', config.apiKey);
 
-            const CLIENT_ID = config.clientId;
-            const AUTHORITY = config.authority;
-            const API_KEY = config.apiKey;
+            const MSAL_CONFIG = {
+                auth: {
+                    clientId: config.clientId,
+                    authority: config.authority
+                }
+            };
           })
-          .catch(error => console.error('Error fetching config:', error));
-
-
-
-
-    const MSAL_CONFIG = {
-        auth: {
-            clientId: CLIENT_ID,
-            authority: AUTHORITY
-        }
-    };
+          .catch(error => console.error('Error fetching config:', error));    
 
     const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);
 
