@@ -1,8 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+        fetch('/config')
+          .then(response => response.json())
+          .then(config => {
+            console.log('Client ID:', config.clientId);
+            console.log('Authority:', config.authority);
+            console.log('API Key:', config.apiKey);
+          })
+          .catch(error => console.error('Error fetching config:', error));
+
+
+
+
     const MSAL_CONFIG = {
         auth: {
-            clientId: 'db788f68-6a9c-4a34-b3e6-0a2adca36b1c',
-            authority: 'https://login.microsoftonline.com/630a260f-04bd-4d65-a04d-f922f6c2c4a0'
+            clientId: config.clientId,
+            authority: config.authority
         }
     };
 
