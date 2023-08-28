@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     authority: config.authority
                 }
             };
-          })
-          .catch(error => console.error('Error fetching config:', error));    
+             
 
     const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);
 
@@ -31,16 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-const authResult = await MSAL_INSTANCE.loginPopup(loginRequest);
-const accessToken = authResult.accessToken;
+    const authResult = await MSAL_INSTANCE.loginPopup(loginRequest);
+    const accessToken = authResult.accessToken;
 
-// Use the access token to make a request to Microsoft Graph API
-console.log('Before fetch');
-const response = await fetch('https://graph.microsoft.com/v1.0/me', {
+
+    const response = await fetch('https://graph.microsoft.com/v1.0/me', {
     headers: {
         'Authorization': `Bearer ${accessToken}`
     }
-});
+    });
 
 if (response.ok) {
     const user = await response.json();
@@ -54,12 +52,15 @@ if (response.ok) {
 
     window.location.href = 'game.html';
 } else {
-    console.error('Error retrieving user information:', response.statusText);
     alert('Error retrieving user information. Please try again.');
 }
 } catch (error) {
-console.error('Error during login:', error);
 alert('Error during login. Please try again.');
 }
       }
+
+
+    })
+    .catch(error => console.error('Error fetching config:', error)); 
+
     });
