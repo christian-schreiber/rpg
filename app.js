@@ -2,6 +2,10 @@ require('dotenv').config();
 
 console.log(require("dotenv").config());
 
+console.log(process.env.CLIENT_ID);
+console.log(process.env.AUTHORITY);
+console.log(process.env.API_KEY);
+
 const express = require('express');
 const app = express();
 const port = 5000;
