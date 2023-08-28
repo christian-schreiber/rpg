@@ -3,10 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/config')
           .then(response => response.json())
           .then(config => {
-            console.log('Client ID:', config.clientId);
-            console.log('Authority:', config.authority);
-            console.log('API Key:', config.apiKey);
-
             const MSAL_CONFIG = {
                 auth: {
                     clientId: config.clientId,
