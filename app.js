@@ -1,11 +1,5 @@
 require('dotenv').config();
 
-console.log(require("dotenv").config());
-
-console.log(process.env.CLIENT_ID);
-console.log(process.env.AUTHORITY);
-console.log(process.env.API_KEY);
-
 const express = require('express');
 const app = express();
 const port = 5000;
@@ -13,8 +7,12 @@ const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get('/config', (req, res) => {
+  res.json({
+    clientId: process.env.CLIENT_ID,
+    authority: process.env.AUTHORITY,
+    apiKey: process.env.API_KEY
+  });
 });
 
 app.use((req, res, next) => {
