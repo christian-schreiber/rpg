@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const MSAL_CONFIG = {
-      auth: {
-        clientId: 'db788f68-6a9c-4a34-b3e6-0a2adca36b1c',
-        authority: 'https://login.microsoftonline.com/630a260f-04bd-4d65-a04d-f922f6c2c4a0',
-        redirectUri: window.location.origin + '/game.html'
-      }
-    };
+
+
+    fetch('/config')
+    .then(response => response.json())
+    .then(config => {
+        const MSAL_CONFIG = {
+            auth: {
+              clientId: config.clientId,
+              authority: config.authority,
+              redirectUri: window.location.origin + '/game.html'
+            }
+          };    
   
     const MSAL_INSTANCE = new msal.PublicClientApplication(MSAL_CONFIG);
   
@@ -64,4 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Error sending data to API. Please try again.');
       }
     }
+
+})
+.catch(error => console.error('Error fetching config:', error)); 
+
   });
