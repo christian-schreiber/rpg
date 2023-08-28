@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Client ID:', config.clientId);
             console.log('Authority:', config.authority);
             console.log('API Key:', config.apiKey);
+
+            const CLIENT_ID = config.clientId;
+            const AUTHORITY = config.authority;
+            const API_KEY = config.apiKey;
           })
           .catch(error => console.error('Error fetching config:', error));
 
@@ -14,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const MSAL_CONFIG = {
         auth: {
-            clientId: config.clientId,
-            authority: config.authority
+            clientId: CLIENT_ID,
+            authority: AUTHORITY
         }
     };
 

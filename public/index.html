@@ -11,18 +11,6 @@
         <script src="msal.js"></script>
         <link rel="icon" href="favicon.ico" type="image/x-icon">
     </head>
-
-    <script>
-        fetch('/config')
-          .then(response => response.json())
-          .then(config => {
-            console.log('Client ID:', config.clientId);
-            console.log('Authority:', config.authority);
-            console.log('API Key:', config.apiKey);
-          })
-          .catch(error => console.error('Error fetching config:', error));
-      </script>
-
     <body>
         <header>
             <div class="header">
